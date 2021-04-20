@@ -1,14 +1,13 @@
-# C CPP Coding Rules
- C/C++ Coding Rules
-
+# C/C++ Coding Rules
+ 
 1 Files/Modules
 =============
 
 The module name is done in CammelCase. 
 
-Example: `LcdDriver`
-- Header-File: `lcddriver.h`
-- C-File/CPP-File: `lcddriver.c` / `lcddriver.cpp`
+Example: `MyModule`
+- Header-File: `mymodule.h`
+- C-File/CPP-File: `mymodule.c` / `mymodule.cpp`
 
 1.1 Disclaimer
 ----------
@@ -252,11 +251,35 @@ typedef int (*pfn_mymodule_callback_t)(uint8_t u8Parameter1, boolean_t bEnable);
 
 Implementation Example:
 ````
+
+/**
+ *******************************************************************************
+ ** Local type definitions ('typedef') 
+ *******************************************************************************
+ */
+
 typedef int (*pfn_mymodule_callback_t)(uint8_t u8Parameter1, boolean_t bEnable);
 
+/**
+ *******************************************************************************
+ ** Local variable definitions ('static') 
+ *******************************************************************************
+ */
+
+/**
+ * Local function prototypes ('static') of callback implementation 
+ * must be set before the variable definition
+ */
 static int MyCallbackImplementation(uint8_t u8Parameter1, boolean_t bEnable);
 
+
 pfn_mymodule_callback_t cbCallback = MyCallbackImplementation;
+
+/**
+ *******************************************************************************
+ ** Function implementation - global ('extern') and local ('static') 
+ *******************************************************************************
+ */
 
 static int MyCallbackImplementation(uint8_t u8Parameter1, boolean_t bEnable)
 {
@@ -265,3 +288,57 @@ static int MyCallbackImplementation(uint8_t u8Parameter1, boolean_t bEnable)
 
 ````
 
+3 Structs
+=========
+
+Structures will be named with a `stc` as prefix followed by the module name in lower-case, seperated by `_` and the name of the struct, ended with `_t` for typedefinition.
+
+Example:
+````
+typedef struct stc_mymodule_my_struct
+{
+    uint8_t* pu8Data;
+    uint32_t u32Length;
+} stc_mymodule_my_struct_t
+````
+
+Variables of the type of struct will be named with a `stc` as prefix followed by the name in CammelCase. For global variables it makes sense to add the module name in CammelCase.
+
+Example:
+````
+static stc_mymodule_my_struct_t stcMyBuffer = {
+                        "test", // pu8Data
+                        4       // u32Length
+                    };
+
+stc_mymodule_my_struct_t stcMyModuleGlobalBuffer =  {
+                        "test2", // pu8Data
+                        5        // u32Length
+                    };
+````
+
+4 Enums
+=======
+
+Enumerations will be named with a `en` as prefix followed by the module name in lower-case, seperated by `_` and the name of the enum, ended with `_t` for typedefinition.
+
+Enum values are written in CammelCase and will start with the module name in CammelCase.
+
+Example:
+````
+typedef struct en_mymodule_my_enum
+{
+    MyModuleData8Bit,
+    MyModuleData16Bit,
+    MyModuleData32Bit
+} en_mymodule_my_enum_t
+````
+
+Variables of the type of enum will be named with a `en` as prefix followed by the name in CammelCase. For global variables it makes sense to add the module name in CammelCase.
+
+Example:
+````
+static en_mymodule_my_enum_t enDataTypeA = MyModuleData8Bit;
+
+en_mymodule_my_enum_t enDataTypeGlobal = MyModuleData32Bit;
+````
