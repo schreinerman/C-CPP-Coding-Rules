@@ -239,55 +239,6 @@ int MyModule_Deinit(stc_mymodule_handle_t* pstcHandle)
 | Array		| au8Values[] | array of uint8_t                  |
 | Callback	| cbMyCallback| callback                          |
 
-2.1 Callback-Handler
---------------------
-
-Callback typedefinitions starting with `pfn` (pointer of function) followed by the module name in lower-case, seperated by `_` and the name of the callback, ended with `_t` for typedefinition.
-
-Definition Example:
-````
-typedef int (*pfn_mymodule_callback_t)(uint8_t u8Parameter1, boolean_t bEnable);
-````
-
-Implementation Example:
-````
-
-/**
- *******************************************************************************
- ** Local type definitions ('typedef') 
- *******************************************************************************
- */
-
-typedef int (*pfn_mymodule_callback_t)(uint8_t u8Parameter1, boolean_t bEnable);
-
-/**
- *******************************************************************************
- ** Local variable definitions ('static') 
- *******************************************************************************
- */
-
-/**
- * Local function prototypes ('static') of callback implementation 
- * must be set before the variable definition
- */
-static int MyCallbackImplementation(uint8_t u8Parameter1, boolean_t bEnable);
-
-
-pfn_mymodule_callback_t cbCallback = MyCallbackImplementation;
-
-/**
- *******************************************************************************
- ** Function implementation - global ('extern') and local ('static') 
- *******************************************************************************
- */
-
-static int MyCallbackImplementation(uint8_t u8Parameter1, boolean_t bEnable)
-{
-    ...
-}
-
-````
-
 3 Structs
 =========
 
@@ -341,4 +292,53 @@ Example:
 static en_mymodule_my_enum_t enDataTypeA = MyModuleData8Bit;
 
 en_mymodule_my_enum_t enDataTypeGlobal = MyModuleData32Bit;
+````
+
+5 Callback-Handler
+------------------
+
+Callback typedefinitions starting with `pfn` (pointer of function) followed by the module name in lower-case, seperated by `_` and the name of the callback, ended with `_t` for typedefinition.
+
+Definition Example:
+````
+typedef int (*pfn_mymodule_callback_t)(uint8_t u8Parameter1, boolean_t bEnable);
+````
+
+Implementation Example:
+````
+
+/**
+ *******************************************************************************
+ ** Local type definitions ('typedef') 
+ *******************************************************************************
+ */
+
+typedef int (*pfn_mymodule_callback_t)(uint8_t u8Parameter1, boolean_t bEnable);
+
+/**
+ *******************************************************************************
+ ** Local variable definitions ('static') 
+ *******************************************************************************
+ */
+
+/**
+ * Local function prototypes ('static') of callback implementation 
+ * must be set before the variable definition
+ */
+static int MyCallbackImplementation(uint8_t u8Parameter1, boolean_t bEnable);
+
+
+pfn_mymodule_callback_t cbCallback = MyCallbackImplementation;
+
+/**
+ *******************************************************************************
+ ** Function implementation - global ('extern') and local ('static') 
+ *******************************************************************************
+ */
+
+static int MyCallbackImplementation(uint8_t u8Parameter1, boolean_t bEnable)
+{
+    ...
+}
+
 ````
