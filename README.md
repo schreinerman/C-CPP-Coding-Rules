@@ -222,7 +222,7 @@ int MyModule_Deinit(stc_mymodule_handle_t* pstcHandle)
 
 
 2 Variables
-=========
+===========
 
 | type      | naming      | description                       |
 |-----------|-------------|-----------------------------------|
@@ -240,5 +240,28 @@ int MyModule_Deinit(stc_mymodule_handle_t* pstcHandle)
 | Array		| au8Values[] | array of uint8_t                  |
 | Callback	| cbMyCallback| callback                          |
 
+2.1 Callback-Handler
+--------------------
 
+Callback typedefinitions starting with `pfn` (pointer of function) followed by the module name in lower-case, seperated by `_` and the name of the callback, ended with `_t` for typedefinition.
+
+Definition Example:
+````
+typedef int (*pfn_mymodule_callback_t)(uint8_t u8Parameter1, boolean_t bEnable);
+````
+
+Implementation Example:
+````
+typedef int (*pfn_mymodule_callback_t)(uint8_t u8Parameter1, boolean_t bEnable);
+
+static int MyCallbackImplementation(uint8_t u8Parameter1, boolean_t bEnable);
+
+pfn_mymodule_callback_t cbCallback = MyCallbackImplementation;
+
+static int MyCallbackImplementation(uint8_t u8Parameter1, boolean_t bEnable)
+{
+    ...
+}
+
+````
 
