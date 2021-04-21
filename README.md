@@ -421,9 +421,9 @@ static int MyCallbackImplementation(uint8_t u8Parameter1, boolean_t bEnable)
 6.1 Global Functions
 --------------------
 
-Global functions are starting with the module name in CammelCase, followed by a `_` and the function name in CammelCase.
+Global functions are starting with the module name in CammelCase, followed by `_` and the function name in CammelCase.
 
-The implementation of the function is done in the c-file while the prototype is located on the h-file.
+The implementation of the function is done in the c-file while the prototype is located in the h-file.
 
 Example:
 ````
@@ -441,9 +441,9 @@ int MyModule_SendData(uint8_t* pu8Data, uint32_t u32Len, pfn_mymodule_callback_t
 6.2 Local Functions
 --------------------
 
-Local functions don't start with module name in CammelCase, followed by a `_` and the function name.
+Local functions don't start with module name in CammelCase, followed by `_`. It will be just the function name in CammelCase.
 
-The implementation of the function is done in the c-file while the prototype is located on the h-file.
+The implementation of the function is done in the c-file while the prototype is located in the upper c-file (prototypes section).
 
 Example:
 ````
