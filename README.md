@@ -1,5 +1,11 @@
 # C/C++ Coding Rules
  
+Coding rules/styles can help improving readability, compatability and stability. 
+
+Following rules are one possibility to define a unique style.
+
+A tool using these rules and providing code templates for new projects is https://github.com/schreinerman/CodeTemplateGen
+
 1 Files/Modules
 ===============
 
@@ -408,3 +414,100 @@ static int MyCallbackImplementation(uint8_t u8Parameter1, boolean_t bEnable)
 }
 
 ````
+
+6 Functions
+===========
+
+6.1 Global Functions
+--------------------
+
+Global functions are starting with the module name in CammelCase, followed by a `_` and the function name in CammelCase.
+
+The implementation of the function is done in the c-file while the prototype is located on the h-file.
+
+Example:
+````
+int MyModule_Init(stc_mymodule_handle_t* pstcHandle)
+{
+    ...
+}
+
+int MyModule_SendData(uint8_t* pu8Data, uint32_t u32Len, pfn_mymodule_callback_t cbCallback)
+{
+    ...
+}
+````
+
+6.2 Local Functions
+--------------------
+
+Local functions don't start with module name in CammelCase, followed by a `_` and the function name.
+
+The implementation of the function is done in the c-file while the prototype is located on the h-file.
+
+Example:
+````
+SendData(uint8_t* pu8Data, uint32_t u32Len)
+{
+    ...
+}
+````
+
+7 If - else
+===========
+
+For C / C++ following instruction is always true: `if (u8Value = 5)`
+
+The intention was to write `if (u8Value == 5)` which is only true if u8Value is 5.
+
+To get a compile error, the variable should be on the right-hand side: `if (5 = u8Value)`
+
+So only following construct is working: `if (5 == u8Value)`
+
+8 Readability
+=============
+
+8.1 spaces vs. tabs
+-------------------
+
+For each functionality-layer use 4 spaces and mind tabulators.
+
+Example:
+````
+if (5 == u8Value)
+{
+    for(i = 0;i < 5;i++)
+    {
+        ...
+    }
+}
+````
+
+8.2 extract code
+----------------
+
+Don't use as much code as possible in one line. This results in issues during debugging.
+
+Bad Example:
+------------
+````
+a = 5;b = 3;
+max = (a > b) ? a : b;
+````
+
+Better Example:
+------------
+````
+u8A = 5
+u8B = 3;
+if (u8A > u8B)
+{
+    u8Max = u8A;
+}
+else
+{
+    u8Max = u8B;
+}
+````
+
+
