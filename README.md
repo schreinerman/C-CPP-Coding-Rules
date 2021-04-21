@@ -1,7 +1,7 @@
 # C/C++ Coding Rules
  
 1 Files/Modules
-=============
+===============
 
 The module name is done in CammelCase. 
 
@@ -266,9 +266,7 @@ Hint: For boolean_t and float32_t/float64_t, the file `base_types.h` can be crea
  *******************************************************************************
  ** \file base_types.h
  **
- ** This is my module
- ** A detailed description is available at
- ** @link MyModuleGroup file description @endlink
+ ** This header file is defining integer, boolean and float types
  **
  ** History:
  ** - 2021-4-20  1.00  Manuel Schreiner
