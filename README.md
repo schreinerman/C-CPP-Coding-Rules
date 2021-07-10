@@ -1,6 +1,6 @@
 # C/C++ Coding Rules
  
-Coding rules/styles can help improving readability, compatability and stability. 
+Coding rules/styles can help improving readability, compatibility and stability. 
 
 Following rules are one possibility to define a unique style.
 
