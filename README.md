@@ -487,7 +487,7 @@ The implementation of the function is done in the c-file while the prototype is 
 
 Example:
 ````
-SendData(uint8_t* pu8Data, uint32_t u32Len)
+static void SendData(uint8_t* pu8Data, uint32_t u32Len)
 {
     ...
 }
