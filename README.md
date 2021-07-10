@@ -6,6 +6,8 @@ Following rules are one possibility to define a unique style.
 
 A tool using these rules and providing code templates for new projects is https://github.com/schreinerman/CodeTemplateGen
 
+In general the DOXYGEN documentation guidelines are used for documentation inside of the code.
+
 1 Files/Modules
 ===============
 
@@ -235,10 +237,10 @@ int MyModule_Deinit(stc_mymodule_handle_t* pstcHandle)
 |-----------|-------------|------------------------------------|
 | uint8_t   | u8Value     | byte / 8-bit unsigned variable     |
 | uint16_t	| u16Value    | word / 16-bit unsigned variable    |   
-| uint32_t	| u32Value    | dword / 16-bit unsigned variable   | 
+| uint32_t	| u32Value    | dword / 32-bit unsigned variable   | 
 | int8_t	| i8Value     | byte / 8-bit signed variable       |
 | int16_t	| i16Value    | word / 16-bit signed variable      |
-| int32_t	| i32Value    | dword / 16-bit signed variable     |
+| int32_t	| i32Value    | dword / 32-bit signed variable     |
 | float32_t | f32Value    | float, `typedef float float32_t;`  |
 | float32_t | f64Value    | double, `typedef double float64_t;`|
 | int    	| iValue      | signed variable, arch dependend    |
@@ -310,8 +312,46 @@ Hint: For boolean_t and float32_t/float64_t, the file `base_types.h` can be crea
  */
 
 ````
+3 Defines
+=========
 
-3 Structs
+All defines shall be written in upper-case.
+
+3.1 Immediates
+--------------
+
+Unsigned immediates should end with UL or ULL, so there are no wrong calculations using a wrong sized immediate.
+
+Example:
+````
+#define    FREQ_40MHZ     40000000UL
+````
+
+3.2 Global Defines
+------------------
+
+Global defines are starting with the module name. For example:
+````
+#define    MYMODULE_MYDEFINE   1
+````
+
+3.3 Local Defines
+-----------------
+
+Local defines do not have any restriction in the naming.
+
+3.4 Helper Functions
+--------------------
+
+If defining local helper functions which possibly can be already integrated globally, make sure these are not double defined
+
+````
+#if !defined ZERO_STRUCT
+#define ZERO_STRUCT(x)  memset(&x,0,sizeof(x))
+#endif //!defined ZERO_STRUCT
+````
+
+4 Structs
 =========
 
 Structures will be named with a `stc` as prefix followed by the module name in lower-case, seperated by `_` and the name of the struct, ended with `_t` for typedefinition.
@@ -340,7 +380,7 @@ stc_mymodule_my_struct_t stcMyModuleGlobalBuffer =  {
                     };
 ````
 
-4 Enums
+5 Enums
 =======
 
 Enumerations will be named with a `en` as prefix followed by the module name in lower-case, seperated by `_` and the name of the enum, ended with `_t` for typedefinition.
@@ -366,7 +406,7 @@ static en_mymodule_my_enum_t enDataTypeA = MyModuleData8Bit;
 en_mymodule_my_enum_t enDataTypeGlobal = MyModuleData32Bit;
 ````
 
-5 Callback-Handler
+6 Callback-Handler
 ------------------
 
 Callback typedefinitions starting with `pfn` (pointer of function) followed by the module name in lower-case, seperated by `_` and the name of the callback, ended with `_t` for typedefinition.
@@ -415,10 +455,10 @@ static int MyCallbackImplementation(uint8_t u8Parameter1, boolean_t bEnable)
 
 ````
 
-6 Functions
+7 Functions
 ===========
 
-6.1 Global Functions
+7.1 Global Functions
 --------------------
 
 Global functions are starting with the module name in CammelCase, followed by `_` and the function name in CammelCase.
@@ -438,7 +478,7 @@ int MyModule_SendData(uint8_t* pu8Data, uint32_t u32Len, pfn_mymodule_callback_t
 }
 ````
 
-6.2 Local Functions
+7.2 Local Functions
 --------------------
 
 Local functions don't start with module name in CammelCase, followed by `_`. It will be just the function name in CammelCase.
@@ -453,7 +493,7 @@ SendData(uint8_t* pu8Data, uint32_t u32Len)
 }
 ````
 
-7 If - else
+8 If - else
 ===========
 
 For C / C++ following instruction is always true: `if (u8Value = 5)`
@@ -464,13 +504,13 @@ To get a compile error, the variable should be on the right-hand side: `if (5 = 
 
 So only following construct is working: `if (5 == u8Value)`
 
-8 Readability
+9 Readability
 =============
 
-8.1 spaces vs. tabs
+9.1 spaces vs. tabs
 -------------------
 
-For each functionality-layer use 4 spaces and mind tabulators.
+For each functionality-layer use 4 spaces and do not use tabulators.
 
 Example:
 ````
@@ -483,7 +523,7 @@ if (5 == u8Value)
 }
 ````
 
-8.2 extract code
+9.2 extract code
 ----------------
 
 Don't use as much code as possible in one line. This results in issues during debugging.
